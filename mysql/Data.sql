@@ -17,13 +17,13 @@ INSERT INTO `lidstatus` (`id`, `naam`) VALUES
 (8, 'Onbekend // Onbetaald');
 
 INSERT INTO `persoon` (`id`, `voornaam`, `achternaam`, `email`, `wachtwoord`, `lid_sinds`) VALUES
-(1, 'Admin', 'Gumbo', 'admin@gumbo.nl', '$2a$10$lfJrk/3V9VumqPT21DV6HOxe5gIq0xDDVJuNwRr.TevazMWRAPJ6i', '2017-01-01'),
+(1, 'Admin', 'Gumbo', 'admin@gumbo.nl', '$2a$10$lfJrk/3V9VumqPT21DV6HOxe5gIq0xDDVJuNwRr.TevazMWRAPJ6i', '2017-01-01');
 
 INSERT INTO `persoon_groep` (`persoon_id`, `groep_id`, `rol_id`) VALUES
-(1, 1, 1),
+(1, 1, 1);
 
 INSERT INTO `persoon_lidstatus` (`id`, `persoon_id`, `jaar`, `lidstatus_id`) VALUES
-(1, 1, '2016', 1),
+(1, 1, '2016', 1);
 
 INSERT INTO `rol` (`id`, `naam`) VALUES
 (1, 'Voorzitter'),

@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `gumbo`
+CREATE DATABASE  IF NOT EXISTS `gumbo`;
 USE `gumbo`;
 
 --
