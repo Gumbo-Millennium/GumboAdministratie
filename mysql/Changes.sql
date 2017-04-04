@@ -1,0 +1,1 @@
+ALTER TABLE `log` ADD `changed_id` INT(11) NOT NULL AFTER `type`;

@@ -12,6 +12,17 @@ class Persoon extends Storm {
 		// Sla de model op als de validatie succesvol is.
 		if ($validate->valid()) {
 			
+			$log = new Log();
+			$log->persoon_id = Auth::user()->id;
+			$log->datetime = date('Y-m-d H:i:s');
+			$log->type = 'persoon';
+				
+			if($persoon->exists){
+				$log->value = json_encode($persoon);
+			} else {
+				$log->value = 'added';
+			}
+			
 			if(!isset($input['gumbode']))
 				$input['gumbode'] = 0;
 			
@@ -35,7 +46,10 @@ class Persoon extends Storm {
 			}
 			
 			$persoon->fill($input);
-			$persoon->save();				
+			$persoon->save();		
+			
+			$log->changed_id = $persoon->id;
+			$log->save();
 			
 			return $persoon;
 		}

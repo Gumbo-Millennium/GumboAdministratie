@@ -18,6 +18,7 @@ In de map mysql staan 2 .sql bestanden. Voer deze in de onderstaande volgorde ui
 ```sh
 Gumbo.sql (structuur)
 Data.sql (data)
+Changes.sql (database wijzigingen na de initiële creatie)
 ```
 Er is standaard 1 account aanwezig. De inloggegevens hiervan zijn: 
 ```sh

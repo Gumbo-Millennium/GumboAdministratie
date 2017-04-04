@@ -3,7 +3,7 @@
 return array(
 
 	'GET /, GET /dashboard' => array('before' => 'auth', function()
-	{		
+	{			
 		return View::make('main')->bind('pagina', View::make('pages/dashboard/overzicht'));
 	}), 
 			
