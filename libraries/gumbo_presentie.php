@@ -47,11 +47,11 @@ class Gumbo_presentie extends TCPDF {
 					->join('persoon', 'persoon.id', '=', 'persoon_lidstatus.persoon_id')
 					->join('lidstatus', 'lidstatus.id', '=', 'persoon_lidstatus.lidstatus_id')
 					->where_jaar(Lidstatus::studiejaar())
-					->where_in('lidstatus_id', array(1, 2, 3, 4, 5, 8))
+					->where_in('lidstatus_id', array(Lidstatus::LID, Lidstatus::OUDLID, Lidstatus::ERELID, Lidstatus::BEGUNSTIGER, Lidstatus::ALID, Lidstatus::ONBEKEND))
 					->order_by('persoon.voornaam')
 					->get();
 		
-		$leden_stem = DB::table('persoon_lidstatus')->where_jaar(Lidstatus::studiejaar())->where_in('lidstatus_id', array(1, 3))->count();
+		$leden_stem = DB::table('persoon_lidstatus')->where_jaar(Lidstatus::studiejaar())->where_in('lidstatus_id', array(Lidstatus::LID, Lidstatus::ERELID))->count();
 		$count = 0;
 		
 		// create some HTML content
@@ -77,7 +77,7 @@ class Gumbo_presentie extends TCPDF {
 			
 			$html.= '<tr '.($count % 2 == 0 ? 'bgcolor = "lightgrey"' : "").'>
 						<td>&nbsp;</td>
-						<td>'.(in_array($lid->lidstatus_id, array(1, 3)) ? 'Ja' : '').'</td>
+						<td>'.(in_array($lid->lidstatus_id, array(Lidstatus::LID, Lidstatus::ERELID)) ? 'Ja' : '').'</td>
 						<td>&nbsp;</td>
 						<td>'.$lid->voornaam.'</td>
 						<td>'.$lid->achternaam.($lid->tussenvoegsel != '' ? ', '.$lid->tussenvoegsel : '').'</td>

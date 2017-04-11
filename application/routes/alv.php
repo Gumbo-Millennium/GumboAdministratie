@@ -8,8 +8,8 @@ return array(
 			return Redirect::to('/dashboard')->with('errors', array('Je hebt geen toegang tot deze sectie'));
 		}
 		
-		$leden_totaal = DB::table('persoon_lidstatus')->where_jaar(Lidstatus::studiejaar())->where_not_in('lidstatus_id', array(6, 7))->count();
-		$leden_stem = DB::table('persoon_lidstatus')->where_jaar(Lidstatus::studiejaar())->where_in('lidstatus_id', array(1, 3))->count();
+		$leden_totaal = DB::table('persoon_lidstatus')->where_jaar(Lidstatus::studiejaar())->where_not_in('lidstatus_id', array(Lidstatus::EXLID, Lidstatus::EXBEGUNSTIGER))->count();
+		$leden_stem = DB::table('persoon_lidstatus')->where_jaar(Lidstatus::studiejaar())->where_in('lidstatus_id', array(Lidstatus::LID, Lidstatus::ERELID))->count();
 	
         $pagina = View::make('pages/alv/overzicht')->bind('leden_totaal', $leden_totaal)->bind('leden_stem', $leden_stem);
 		return View::make('main')->bind('pagina', $pagina);

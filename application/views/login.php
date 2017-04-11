@@ -8,14 +8,14 @@
 		<title>Gumbo | Login</title>
 
 		<?= HTML::style('externals/toastr/toastr.min.css') ?>
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+		<?= HTML::style('css/bootstrap.min.css') ?>
+		<?= HTML::style('font-awesome/css/font-awesome.css') ?>
 
-		<link href="css/animate.css" rel="stylesheet">
-		<link href="css/style.css" rel="stylesheet">
+		<?= HTML::style('css/animate.css') ?>
+		<?= HTML::style('css/style.css') ?>
 
-		<script src="js/jquery-2.1.3.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		<?= HTML::script('js/jquery-2.1.3.min.js') ?>
+		<?= HTML::script('js/bootstrap.min.js') ?>
 		<?= HTML::script('externals/toastr/toastr.min.js') ?>
 	</head>
 

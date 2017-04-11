@@ -34,7 +34,7 @@ class Gumbo_stickers extends TCPDF {
 		$leden = DB::table('persoon_lidstatus')
 					->join('persoon', 'persoon.id', '=', 'persoon_lidstatus.persoon_id')
 					->join('lidstatus', 'lidstatus.id', '=', 'persoon_lidstatus.lidstatus_id')
-					->where_in('lidstatus_id', array(1, 2, 3, 4, 5, 8))
+					->where_in('lidstatus_id', array(Lidstatus::LID, Lidstatus::OUDLID, Lidstatus::ERELID, Lidstatus::BEGUNSTIGER, Lidstatus::ALID, Lidstatus::ONBEKEND))
 					->where('persoon_lidstatus.jaar', '=', Lidstatus::studiejaar())
 					->where('adres', "!=", '')
 					->where('postcode', "!=", '')

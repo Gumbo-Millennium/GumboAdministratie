@@ -136,7 +136,11 @@ class Persoon extends Storm {
 	{
 		//Huidig jaar bepalen
 		$jaar = DB::table('persoon_lidstatus')->order_by('jaar', 'desc')->first(array('jaar'))->jaar;		
-		$lidstatussen = DB::table('persoon_lidstatus')->join('lidstatus', 'lidstatus.id', '=', 'persoon_lidstatus.lidstatus_id')->where_jaar($jaar)->where_in('lidstatus_id', array(1, 2, 3, 4, 5, 8))->get();
+		$lidstatussen = DB::table('persoon_lidstatus')
+						->join('lidstatus', 'lidstatus.id', '=', 'persoon_lidstatus.lidstatus_id')
+						->where_jaar($jaar)
+						->where_in('lidstatus_id', array(Lidstatus::LID, Lidstatus::OUDLID, Lidstatus::ERELID, Lidstatus::BEGUNSTIGER, Lidstatus::ALID, Lidstatus::ONBEKEND))
+						->get();
 		$array = array();
 		$array_new = array();
 		$count = 0;

@@ -21,7 +21,7 @@ class Agenda extends Storm {
 			
 			$lidstatus = DB::table('persoon_lidstatus')->where_persoon_id($persoon->id)->order_by('jaar', 'desc')->first();
 			
-			if(in_array($lidstatus->lidstatus_id, array(1, 2, 3, 4, 5, 8))){
+			if(in_array($lidstatus->lidstatus_id, array(Lidstatus::LID, Lidstatus::OUDLID, Lidstatus::ERELID, Lidstatus::BEGUNSTIGER, Lidstatus::ALID, Lidstatus::ONBEKEND))){
 				$verjaardag = date('Y').'-'.substr($persoon->geboortedatum, 5);
 
 				$verjaardag_array[$count]['id'] = 'p-'.$persoon->id;

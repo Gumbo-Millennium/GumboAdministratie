@@ -8,9 +8,7 @@ return array(
 			return Redirect::to('/dashboard')->with('errors', array('Je hebt geen toegang tot deze sectie'));
 		}
 	
-		$items = Agenda::getAgendaItems();
-	
-		$pagina = View::make('pages/agenda/overzicht')->bind('items', $items);
+		$pagina = View::make('pages/agenda/overzicht')->bind('items', Agenda::getAgendaItems());
 		return View::make('main')->bind('pagina', $pagina);
     }),
 );

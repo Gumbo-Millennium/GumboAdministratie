@@ -41,7 +41,7 @@ return array(
 			return Redirect::to('/personen/nieuw')->with('errors', $result);
 		}
 		
-		DB::table('persoon_lidstatus')->insert(array('persoon_id' => $result->id, 'jaar' => '2016-09-01', 'lidstatus_id' => 8));
+		DB::table('persoon_lidstatus')->insert(array('persoon_id' => $result->id, 'jaar' => Lidstatus::studiejaar(), 'lidstatus_id' => Lidstatus::ONBEKEND));
 		
 		return Redirect::to('/personen/overzicht')->with('success', array('Persoon is toegevoegd'));
     }), 

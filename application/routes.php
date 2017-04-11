@@ -27,7 +27,7 @@ return array(
 		return View::make('login');
 	}),   
 			
-	'GET /mailchimp/synchronisatie' => array( function()
+	'GET /mailchimp/synchronisatie' => array('before' => 'auth', function()
 	{
 		if(!Auth::user()->has_groep(Groep::BESTUUR)){
 			return Redirect::to('/dashboard')->with('errors', array('Je hebt geen toegang tot deze sectie'));
