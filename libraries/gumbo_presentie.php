@@ -67,8 +67,8 @@ class Gumbo_presentie extends TCPDF {
 					<th width="50"><strong>Aanwezig</strong></th>
 					<th width="50"><strong>Stemrecht</strong></th>
 					<th><strong>Heeft gemachtigd</strong></th>
-					<th><strong>Voornaam</strong></th>
-					<th><strong>Achternaam</strong></th>
+					<th><strong>Naam</strong></th>
+					<th><strong>E-mailadres</strong></th>
 					<th><strong>Lidstatus</strong></th>
 					</tr>
 				';
@@ -79,8 +79,8 @@ class Gumbo_presentie extends TCPDF {
 						<td>&nbsp;</td>
 						<td>'.(in_array($lid->lidstatus_id, array(Lidstatus::LID, Lidstatus::ERELID)) ? 'Ja' : '').'</td>
 						<td>&nbsp;</td>
-						<td>'.$lid->voornaam.'</td>
-						<td>'.$lid->achternaam.($lid->tussenvoegsel != '' ? ', '.$lid->tussenvoegsel : '').'</td>
+						<td>'.str_replace('  ', ' ',$lid->voornaam.' '.$lid->tussenvoegsel.' '.$lid->achternaam).'</td>
+						<td>'.$lid->email.'</td>	
 						<td>'.$lid->naam.'</td>
 					</tr>';			
 			
