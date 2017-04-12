@@ -4,7 +4,7 @@ class Log extends Storm {
 
 	public static function getLogItems($aantal = 0)
 	{
-		$logs = Log::order_by('datetime', 'desc')->get();
+		$logs = Log::order_by('datetime', 'desc')->where('persoon_id', '!=', 0)->get();
 		
 		foreach($logs as $log){
 			

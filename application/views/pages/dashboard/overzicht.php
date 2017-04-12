@@ -19,12 +19,18 @@
 						</div>
 						<div class="ibox-content no-padding">
 							<ul class="list-group">
-								<?php $logs = Log::getLogItems(); ?>
+								<?php 
+									$logs = Log::getLogItems(); 
+									$count = 0;
+								?>
+								
 								<?php foreach($logs as $log): ?>
+									<?php if($count == 9){ break; } ?>
 									<li class="list-group-item">
 										<p><a class='text-info' href='#'><?= Persoon::find($log->persoon_id)->volledige_naam() ?></a> <?= $log->message ?></p>
 										<small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minutes ago</small>
 									</li>
+									<?php $count++ ?>
 								<?php endforeach ?>
 							</ul>
 						</div>

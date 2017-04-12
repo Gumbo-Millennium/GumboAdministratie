@@ -124,7 +124,8 @@ return array(
 			DB::table('log')->insert(array('persoon_id' => Auth::user()->id, 'datetime' => date('Y-m-d H:i:s'), 'type' => 'login', 'value' => 'success'));
 			return Redirect::to('/');
 		}
-
+		
+		DB::table('log')->insert(array('persoon_id' => 0, 'datetime' => date('Y-m-d H:i:s'), 'type' => 'login', 'value' => 'fail'));
 		return Redirect::to('/login')->with('error', true);
 	},
 			
