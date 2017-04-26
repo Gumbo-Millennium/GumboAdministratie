@@ -20,14 +20,14 @@ package "Gumbo/MyGumbo" <<Folder>> {
   }
 
   class Lidstatus {
-    {static} +LID: int
-    {static} +OUDLID: int
-    {static} +ERELID: int
-    {static} +BEGUNSTIGER: int
-    {static} +ALID: int
-    {static} +EXLID: int
-    {static} +EXBEGUNSTIGER: int
-    {static} +ONBEKEND: int
+    {static} +LID: int = 1
+    {static} +OUDLID: int = 2
+    {static} +ERELID: int = 3
+    {static} +BEGUNSTIGER: int = 4
+    {static} +ALID: int = 5
+    {static} +EXLID: int = 6
+    {static} +EXBEGUNSTIGER: int = 7
+    {static} +ONBEKEND: int = 8
     ..
     +id: int
     +naam: string
@@ -76,7 +76,7 @@ package "Gumbo/MyGumbo" <<Folder>> {
   }
 
   class Rol {
-    {static} +VOORZITTER: int
+    {static} +VOORZITTER: int = 1
     ..
     +id: int
     +naam: string
