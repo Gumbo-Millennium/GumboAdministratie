@@ -1,0 +1,42 @@
+@startuml
+
+left to right direction
+
+
+:Lid: as member
+:Bezoeker: as guest
+:Commissievoorzitter: as groupchief
+:Bestuur: as board
+
+guest <|-- member
+member <|-- groupchief
+groupchief <|-- board
+
+guest --> (Inloggen)
+guest --> (Wachtwoord opvragen)
+
+member --> (Dashboard bekijken)
+member --> (Inzien accountgebeurtenissen)
+member --> (Eigen gegevens inzien)
+member --> (Eigen groepen inzien)
+member --> (Eigen lidmaatschap inzien)
+member --> (Eigen gegevens aanpassen)
+member --> (Teruglezen e-mails mailchimp)
+member --> (Uitloggen)
+
+groupchief --> (Bewerken commissiedetails)
+groupchief --> (Beheren commissieleden)
+groupchief --> (Toevoegen commissieleden)
+
+board --> (Inzien ledenopbouw)
+board --> (Inzien systeemlog)
+board --> (Bewerken gegevens leden)
+board --> (Inzien alle leden)
+board --> (Inzien gegevens leden)
+board --> (Wijzigen lidstatus leden)
+board --> (Wijzigen groepen leden)
+board --> (Sychroniseren met MailChimp)
+board --> (Genereren adressenlijst)
+board --> (Genereren ALV presentielijst)
+
+@enduml
