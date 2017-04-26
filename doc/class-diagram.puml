@@ -1,123 +1,126 @@
 @startuml
 
-package "Gumbo/MyGumbo" <<Folder>> {
-  class Storm<Framework provided>
+left to right direction
 
-  class Agenda {
-    {static} +getAgendaItems(): string
-    {static} -getVerjaardagen(): array
-  }
-  note bottom: Not available in database,\n constructed from Persoon model
+class Agenda {
+  {static} +getAgendaItems(): string
+  {static} -getVerjaardagen(): array
+}
+note right: Not available in database,\n constructed from Persoon model
 
-  class Groep {
-    +id: int
-    +naam: string
-    +type: string
-    +email: string
-    +omschrijving: string
+class Groep {
+  +id: int
+  +naam: string
+  +type: string
+  +email: string
+  +omschrijving: string
 
-    +personen(): Persoon[]
-  }
-
-  class Lidstatus {
-    {static} +LID: int = 1
-    {static} +OUDLID: int = 2
-    {static} +ERELID: int = 3
-    {static} +BEGUNSTIGER: int = 4
-    {static} +ALID: int = 5
-    {static} +EXLID: int = 6
-    {static} +EXBEGUNSTIGER: int = 7
-    {static} +ONBEKEND: int = 8
-    ..
-    +id: int
-    +naam: string
-
-    {static} +studiejaar(): int
-  }
-
-  class Log {
-    +id: int
-    +persoon_id: int
-    +datetime: datetime
-    +type: string
-    +value: string
-
-    {static} +getLogItems(aantal: int): Log[]
-  }
-
-  class Persoon {
-    +id: int
-    +voornaam: string
-    +tussenvoegsel: string
-    +achternaam: string
-    +email: string
-    +adres: string
-    +postcode: string
-    +woonplaats: string
-    +wachtwoord: string
-    +geboortedatum: date
-    +geslacht: string
-    +opmerkingen: string
-    +lid_sinds: date
-    +lid_tot: date
-    +gumbode: bool
-    +post: bool
-
-    {static} +commit(persoon_id: int): Persoon
-    {static} -validate(input: array, persoon: Persoon): System\Validator
-    {static} +getMorrisLedenopbouw(): string
-    ..
-    +volledige_naam(): string
-    +groepen(): Groep[]
-    +lidstatussen(): array
-    +lidstatus(): string
-    +has_groep(): bool
-    +has_groeptype(type: string): bool
-  }
-
-  class Rol {
-    {static} +VOORZITTER: int = 1
-    ..
-    +id: int
-    +naam: string
-  }
-
-  class Token {
-    +id: int
-    +token: string
-    +created_at: datetime
-    +lifetime: int
-    +code: string
-    +persoon_id: int
-    +email: string
-
-    {static} +create(persoon_id: int, email: string, lifetime: int, code: string): bool
-    {static} +forget(persoon_id: int, email: string)
-    {static} +resetPassword(token: string, email: string)
-  }
+  +personen(): Persoon[]
 }
 
-package "Current database" <<Database>> {
-  class persoon_evenement {
-    persoon_id: int
-    evenement_id: int
-    betaald: bool
-    datum_inschrijven: date
-    datum_betaald: date
-  }
-  class persoon_groep {
-    persoon_id: int
-    groep_id: int
-    rol_id: int
-  }
-  class persoon_lidstatus {
-    id: int
-    persoon_id: int
-    jaar: string
-    lidstatus_id: int
-  }
+class Lidstatus {
+  LID: int = 1
+  OUDLID: int = 2
+  ERELID: int = 3
+  BEGUNSTIGER: int = 4
+  ALID: int = 5
+  EXLID: int = 6
+  EXBEGUNSTIGER: int = 7
+  ONBEKEND: int = 8
+  ..
+  +id: int
+  +naam: string
+
+  {static} +studiejaar(): int
 }
 
-hide Storm
+class Log {
+  +id: int
+  +persoon_id: int
+  +datetime: datetime
+  +type: string
+  +value: string
+
+  {static} +getLogItems(aantal: int): Log[]
+}
+
+class Persoon {
+  +id: int
+  +voornaam: string
+  +tussenvoegsel: string
+  +achternaam: string
+  +email: string
+  +adres: string
+  +postcode: string
+  +woonplaats: string
+  +wachtwoord: string
+  +geboortedatum: date
+  +geslacht: string
+  +opmerkingen: string
+  +lid_sinds: date
+  +lid_tot: date
+  +gumbode: bool
+  +post: bool
+
+  {static} +commit(persoon_id: int): Persoon
+  {static} -validate(input: array, persoon: Persoon): System\Validator
+  {static} +getMorrisLedenopbouw(): string
+  ..
+  +volledige_naam(): string
+  +groepen(): Groep[]
+  +lidstatussen(): array
+  +lidstatus(): string
+  +has_groep(): bool
+  +has_groeptype(type: string): bool
+}
+
+class Rol {
+  VOORZITTER: int = 1
+  ..
+  +id: int
+  +naam: string
+}
+
+class Token {
+  +id: int
+  +token: string
+  +created_at: datetime
+  +lifetime: int
+  +code: string
+  +persoon_id: int
+  +email: string
+
+  {static} +create(persoon_id: int, email: string, lifetime: int, code: string): bool
+  {static} +forget(persoon_id: int, email: string)
+  {static} +resetPassword(token: string, email: string)
+}
+
+class persoon_groep << (V,pink) virtual >> {
+  persoon_id: int
+  groep_id: int
+  rol_id: int
+}
+class persoon_lidstatus << (V,pink) virtual >> {
+  id: int
+  persoon_id: int
+  jaar: string
+  lidstatus_id: int
+}
+
+Persoon "0..*" - "0..*" Groep
+(Persoon, Groep) .. persoon_groep
+
+Persoon "0..*" - "0..*" Lidstatus
+(Persoon, Lidstatus) .. persoon_lidstatus
+
+Rol -- persoon_groep
+
+note as N1
+  Virtual packages are used to link objects together,
+  they only exist in the database
+end note
+
+persoon_groep .. N1
+persoon_lidstatus .. N1
 
 @enduml
